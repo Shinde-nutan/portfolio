@@ -109,9 +109,12 @@ function PortraitVisual() {
       <div className="orbit orbit-one" aria-hidden="true" />
       <div className="orbit orbit-two" aria-hidden="true" />
       <span className="tech-node node-python">Python</span>
-      <span className="tech-node node-api">Django</span>
+      <span className="tech-node node-django">Django</span>
+      <span className="tech-node node-fastapi">FastAPI</span>
       <span className="tech-node node-sql">SQL</span>
+      <span className="tech-node node-rest">REST</span>
       <span className="tech-node node-cloud">AWS</span>
+      <span className="tech-node node-git">Git &amp; GitHub</span>
       <div className="portrait-card">
         <img src={publicAsset(profile.image)} alt="Nutan Shinde, backend engineer" />
         <div className="portrait-shine" aria-hidden="true" />
@@ -167,17 +170,23 @@ function TechnologyShowcase() {
 }
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <BackgroundEffects />
       <div className="hero-shell">
         <nav className="nav" aria-label="Main navigation">
           <a className="brand" href="#home"><span>NS</span> Nutan Shinde</a>
-          <div className="nav-links">
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#experience">Experience</a>
-            <a href="#contact">Contact</a>
+          <button className="nav-toggle" type="button" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label="Toggle navigation" onClick={() => setMenuOpen((open) => !open)}>
+            <span /><span /><span />
+          </button>
+          <div className={menuOpen ? "nav-links open" : "nav-links"} id="mobile-navigation">
+            <a href="#skills" onClick={() => setMenuOpen(false)}>Skills</a>
+            <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+            <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
           </div>
           <a className="nav-cta" href={profile.linkedin} target="_blank" rel="noreferrer">Let&apos;s connect ↗</a>
         </nav>
@@ -194,14 +203,14 @@ export default function App() {
               <a className="social-link" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
             </div>
             <div className="hero-stack" aria-label="Core technologies">
-              <span>Python</span><span>Django</span><span>FastAPI</span><span>SQL</span><span>REST</span><span>AWS</span>
+              <span>Python</span><span>Django</span><span>FastAPI</span><span>SQL</span><span>REST</span><span>AWS</span><span>Git &amp; GitHub</span>
             </div>
           </div>
           <PortraitVisual />
         </header>
       </div>
 
-      <main>
+      <main id="main-content">
         <section id="skills">
           <div className="section-heading split-heading">
             <div><p className="eyebrow">TECHNOLOGY & SKILLS</p><h2>Backend technologies I work with.</h2></div>
@@ -236,7 +245,7 @@ export default function App() {
         </section>
 
         <section id="experience">
-          <div className="section-heading split-heading"><div><p className="eyebrow">PROFESSIONAL EXPERIENCE</p><h2>Backend engineering in production.</h2></div><p>Hands-on experience building, debugging and supporting enterprise commerce workflows at HotWax Commerce.</p></div>
+          <div className="section-heading split-heading"><div><p className="eyebrow">CAREER EXPERIENCE</p><h2>Contributing to enterprise commerce at scale.</h2></div><p>Progressive experience at HotWax Commerce—from an engineering internship to building backend integrations and supporting production systems.</p></div>
           <div className="experience-list">{experience.map((x, i) => (
             <article key={x.role} className="job">
               <div className="company-mark">HC</div>
