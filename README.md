@@ -1,26 +1,35 @@
-# Portfolio — React + FastAPI
+# Portfolio — React
 
-- `frontend/` React (Vite) site. Edit content in `src/data.js`.
-- `backend/` FastAPI contact API (validation, rate limit, SQLite).
+- `frontend/` React (Vite) portfolio. Edit content in `src/data.js`.
+- Contact email is sent directly from the frontend through EmailJS.
 - `.github/workflows/deploy.yml` builds and publishes the frontend to GitHub Pages.
-- `render.yaml` deploys the backend to Render.
 
 ## Run locally
-```bash
-cd backend && python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt && uvicorn main:app --reload      # :8000
 
-cd frontend && npm install
-echo "VITE_API_URL=http://localhost:8000" > .env.local
-npm run dev                                                        # :5173
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+npm run dev
 ```
 
-## Deploy
-1. Push to a GitHub repo named `portfolio` (branch `main`).
-2. Repo → Settings → Pages → Source: **GitHub Actions**.
-3. Render → New → Blueprint → select the repo. Set `ALLOWED_ORIGINS` to `https://<username>.github.io`.
-4. Repo → Settings → Secrets and variables → Actions → Variables → add `VITE_API_URL` = your Render URL.
-5. Push again. Site: `https://<username>.github.io/portfolio/`.
+## Contact email setup
 
-Without `VITE_API_URL` the contact section shows a plain mailto link.
-Note: Render's free tier has an ephemeral disk, so stored messages can be lost on redeploy.
+1. Create an EmailJS account and add an email service.
+2. Create a template using `{{from_name}}`, `{{reply_to}}`, `{{subject}}`, `{{message}}`, and `{{to_name}}`.
+3. Copy `frontend/.env.example` to `frontend/.env.local` and add your IDs:
+
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+The EmailJS public key is designed for browser use. Never add a private key or Gmail password to frontend code.
+
+## Deploy
+
+1. Push to the `main` branch.
+2. Repository Settings → Pages → Source: **GitHub Actions**.
+3. Settings → Secrets and variables → Actions → Variables → add the three `VITE_EMAILJS_*` values.
+4. Push again. The site will be available at `https://<username>.github.io/portfolio/`.
