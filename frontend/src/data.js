@@ -9,7 +9,7 @@ export const profile = {
   email: "",
   github: "https://github.com/Shinde-nutan",
   linkedin: "https://www.linkedin.com/in/nutan-shinde-26a151208/",
-  image: "/ProfilePhoto.jpeg",
+  image: "ProfilePhoto.jpeg",
 };
 
 export const flow = [

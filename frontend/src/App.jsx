@@ -7,6 +7,8 @@ const EMAILJS = {
   publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
+const publicAsset = (fileName) => `${import.meta.env.BASE_URL}${fileName}`;
+
 function BackgroundEffects() {
   useEffect(() => {
     let frame;
@@ -111,7 +113,7 @@ function PortraitVisual() {
       <span className="tech-node node-sql">SQL</span>
       <span className="tech-node node-cloud">AWS</span>
       <div className="portrait-card">
-        <img src={profile.image} alt="Nutan Shinde, backend engineer" />
+        <img src={publicAsset(profile.image)} alt="Nutan Shinde, backend engineer" />
         <div className="portrait-shine" aria-hidden="true" />
       </div>
       <div className="availability"><span /> Available for backend opportunities</div>
@@ -251,7 +253,7 @@ export default function App() {
         </section>
 
         <section className="architecture">
-          <div className="architecture-image"><img src="/backend-systems.png" alt="Backend systems and data pipeline illustration" /></div>
+          <div className="architecture-image"><img src={publicAsset("backend-systems.png")} alt="Backend systems and data pipeline illustration" /></div>
           <div>
             <p className="eyebrow">ENGINEERING APPROACH</p>
             <h2>Design for failure.<br />Recover with confidence.</h2>
